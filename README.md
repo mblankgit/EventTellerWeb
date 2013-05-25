@@ -1,7 +1,6 @@
 EventTellerWeb
 ==============
 
-WebSite of the EventTeller
 
 This is the web site of EventTeller
 
