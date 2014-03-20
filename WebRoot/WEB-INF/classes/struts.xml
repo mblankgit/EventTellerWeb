@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+ 
+  <package name="basicstruts2" extends="struts-default">
+  
+    <action name="index">
+      <result>/index.jsp</result>
+    </action>
+         
+    <action name="sts" class="action.StsAction" method="getUrlCount">
+      <result>/sts.jsp</result>
+    </action>
+    
+    <action name="events">
+      <result>/events.jsp</result>
+    </action>
+    
+    <action name="show_events" class="action.GetEventAction" method="getEvent" >
+      <result name="success">/showEvents.jsp</result>
+    </action>
+        
+    <action name="search" class="action.SearchEventAction" method="showSearchResults">
+      <result>/search.jsp</result>
+    </action>
+    
+    
+  </package>
+  
+  <package name="ajax" namespace=""  extends="json-default">
+	
+        <action name="SelectEvents" class="action.EventAction" method="getDayEventList">
+            <result type="json" name="success"></result>
+        </action>
+        
+        <action name="SearchEventJson" class="action.SearchEventAction" method="showSearchResults">
+            <result type="json"></result>
+        </action>
+        
+        
+    </package>
+</struts>    
