@@ -41,7 +41,7 @@ public class SearchEventAction {
 		EventQuery = EventQuery.replace(" ", "");
 		results = new ArrayList<Event>();
 		EventIndex ei = new EventIndex();
-		results = ei.queryEvents("et_title:" + EventQuery, 0, SearchBatchSize, "et_number","desc");
+		results = ei.queryEvents("et_title:" + EventQuery, 0, SearchBatchSize, null,"desc");
 		return "success";
 	}
 

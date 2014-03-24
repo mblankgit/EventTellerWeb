@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
      <base href="<%=basePath%>">
     <title>EventTeller Index</title>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="pragma" content="no-cache">
@@ -23,16 +22,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    	<jsp:include page="header.jsp"/>
-    	<div class="container">
-    	<hr>
-    	<s:property value="UrlTotalCount"/>	
-    </div>
+    <jsp:include page="header.jsp"/>
+    	
+    <div class="container">
+		
+		<div id="container" style="width:100%; height:400px;">
+		
+		</div>
+			
+   	</div>
+   		
   	 <jsp:include page="footer.html"/>
     
     <script src="public/js/jquery.js"></script>
     <script src="public/js/jquery-ui.js"></script>
    	<script src="public/js/bootstrap.min.js"></script>	
     <script src="public/js/search.js"></script>
+    <script src="public/js/highcharts.js"></script>
+    <script src="public/js/sts.js"></script>
   </body>
 </html>

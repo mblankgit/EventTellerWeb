@@ -26,6 +26,14 @@
       <result>/search.jsp</result>
     </action>
     
+    <action name="topics">
+      <result>/topics.jsp</result>
+    </action>
+    
+    <action name="show_topic" class="action.GetTopicAction" method="getTopic" >
+      <result name="success">/showTopic.jsp</result>
+    </action>
+    
     
   </package>
   
@@ -36,6 +44,10 @@
         </action>
         
         <action name="SearchEventJson" class="action.SearchEventAction" method="showSearchResults">
+            <result type="json"></result>
+        </action>
+        
+        <action name="SelectTopics" class="action.TopicAction" method="showTopics">
             <result type="json"></result>
         </action>
         

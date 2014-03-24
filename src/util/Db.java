@@ -58,7 +58,12 @@ public class Db {
 	@SuppressWarnings("rawtypes")
 	public List getElement(String query, int start, int max){
 		Session session = sf.openSession();
-		List res = session.createQuery(query).setMaxResults(max).list();
+		List res = null;
+		if(max > 0){
+			res = session.createQuery(query).setFirstResult(start).setMaxResults(max).list();
+		}else{
+			res = session.createQuery(query).setFirstResult(start).list();
+		}
 		session.close();
 		return res;		
 	}
