@@ -4,8 +4,8 @@
             $("#event_date_text").datepicker({
             	dateFormat: "yy-mm-dd"
             });
-                		
-    		selectNews();
+            var subtopic = 0;
+    		selectNews(subtopic);
         });
 	
         
@@ -33,7 +33,7 @@
         
         
         
-        function selectNews(){
+        function selectNews(topic){
         	
        	 	 $("#events").hide();
 			 $("#loadimg").show();
@@ -41,7 +41,7 @@
         		'SelectEvents',
         		{
         			indate:$('#event_date_text').val(),
-        			subtopic:$("#myTab .active").text()
+        			subtopic:topic
         		},
         		function(data){
         			var html ;
@@ -54,80 +54,93 @@
         }
 
         $('#bt_show_events').click(function (e){
-        	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
         });
         
         
 		$('#myTab li:eq(0) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
   		});
 
 		$('#myTab li:eq(1) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
   		});
 		
 		$('#myTab li:eq(2) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
   		});
 
 		$('#myTab li:eq(3) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
   		});
         
 		$('#myTab li:eq(4) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(5) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(6) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(7) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(8) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(9) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();	  		  
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);  		  
 	  	});
 
 		$('#myTab li:eq(10) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		$('#myTab li:eq(11) a').click(function (e) {
   		  	e.preventDefault();
   		  	$(this).tab('show');
-  		  	selectNews();
+  		  	var topic = $('#myTab li.active').index();
+  		  	selectNews(topic);
 	  	});
 		
 		

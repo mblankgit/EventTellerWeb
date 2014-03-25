@@ -8,18 +8,21 @@
 
 
 function showChar1() { 
-	 $('#container').highcharts({
+	 $('#chart1').highcharts({
          title: {
-             text: 'Monthly Average Temperature',
+             text: 'STS chart example one',
              x: -20 //center
          },
-         subtitle: {
-             text: 'Source: WorldClimate.com',
-             x: -20
-         },
+//         subtitle: {
+//             text: 'Source: WorldClimate.com',
+//             x: -20
+//         },
          xAxis: {
              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+         },
+         credits: {
+        	 enabled: false
          },
          yAxis: {
              title: {
@@ -32,7 +35,7 @@ function showChar1() {
              }]
          },
          tooltip: {
-             valueSuffix: '°„C'
+             valueSuffix: 'c'
          },
          legend: {
              layout: 'vertical',

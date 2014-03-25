@@ -20,7 +20,7 @@ public class EventAction extends ActionSupport{
 	 * 
 	 */
 	private String indate;
-	private String subtopic;
+	private int subtopic;
 	
 	
 	private List<Event> ets;
@@ -40,14 +40,14 @@ public class EventAction extends ActionSupport{
 
 
 
-	public String getSubtopic() {
+	public int getSubtopic() {
 		return subtopic;
 	}
 
 
 
 
-	public void setSubtopic(String subtopic) {
+	public void setSubtopic(int subtopic) {
 		this.subtopic = subtopic;
 	}
 
@@ -59,14 +59,12 @@ public class EventAction extends ActionSupport{
 		this.ets = ets;
 	}
 
-
 	
 	private int getSubTopic(){
-		if( subtopic == null || subtopic == ""){
+		if( subtopic < 0){
 			return 2;
 		}
-		util.Const.loadSubtopicMap();
-		return util.Const.subtopicMap.get(subtopic.toLowerCase());
+		return (int) Math.pow(2, subtopic + 1);
 	}
 
 
@@ -102,6 +100,7 @@ public class EventAction extends ActionSupport{
 			ets.add(et);
 		}
 		
+		System.out.println(subtopic);
 		
 //		String hql = "from Event as obj where obj.day = " + to_day + " and obj.topic = " + topic + " order by obj.number desc ";
 //		util.Db db = new util.Db();

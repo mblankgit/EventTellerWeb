@@ -26,7 +26,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     <div class="container">
 		
-		<div id="container" style="width:100%; height:400px;">
+		<div class="row">
+			
+			<div class="col-md-6">
+				<div class="row" id = "chart1"></div>
+			</div>
+			
+			<div class="col-md-6">
+				<div class="row" id="chart2"></div>
+			</div>
 		
 		</div>
 			
