@@ -17,6 +17,10 @@
     <action name="events">
       <result>/events.jsp</result>
     </action>
+
+    <action name="timeline">
+      <result>/timeline.jsp</result>
+    </action>
     
     <action name="show_events" class="action.GetEventAction" method="getEvent" >
       <result name="success">/showEvents.jsp</result>
