@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-      	<nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
   		<div class="container">
 		    <div class="navbar-header">
 		    	<a class="navbar-brand" href="#">EventTeller</a>
@@ -15,8 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <li><a href="">Home</a></li>
 			        <li><a href="events">Event</a></li>
 			        <li><a href="topics">Topic</a></li>
+			        <li><a href="timeline">Timeline</a></li>
 			        <li><a href="sts">Sts</a></li>
-      			</ul>
+			    </ul>
       			
       			<form class="navbar-form navbar-right" method="post" role="search" action="search">
 	        		<div class="form-group">
