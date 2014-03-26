@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>EventTeller - Event</title>
+    <title>EventTeller - Timeline</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div class="container">			
 		<div class="row">
-			<div id="my-timeline" class="col-md-12">
+			<div id="my-timeline" class="col-md-12" style="min-height:800px">
 				
 
 			</div>

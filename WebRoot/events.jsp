@@ -21,32 +21,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     
-    <jsp:include page="header.jsp"/>
+    
+      <jsp:include page="header.jsp"/>
     
 	<div class="container">
 	
     	<ul class="nav nav-tabs" id="myTab">
-			<li class="active"><a href="">Main</a></li>
-			<li><a href="">China</a></li>
-			<li><a href="">World</a></li>
-			<li><a href="">Society</a></li>
-			<li><a href="">Military</a></li>
-			<li><a href="">Health</a></li>
-			<li><a href="">Sports</a></li>
-			<li><a href="">Entertainment</a></li>
-			<li><a href="">Finance</a></li>
-			<li><a href="">Technology</a></li>
-			<li><a href="">Education</a></li>
-			<li><a href="">Law</a></li>
+			<li class="active"><a href="">热门</a></li>
+			<li><a href="">国内</a></li>
+			<li><a href="">国外</a></li>
+			<li><a href="">社会</a></li>
+			<li><a href="">军事</a></li>
+			<li><a href="">健康</a></li>
+			<li><a href="">体育</a></li>
+			<li><a href="">娱乐</a></li>
+			<li><a href="">财经</a></li>
+			<li><a href="">科技</a></li>
+			<li><a href="">教育</a></li>
+			<li><a href="">法律</a></li>
 		</ul>
 		
 		<p></p>
 		
 		<div class="row">
 				
-			<div class="col-md-9" >
+			<div class="col-md-9" style="min-height:600px;">
 			
-				<div  id = "loadimg" style="display: none;">
+				<div id="loadimg" style="display: none; text-align:center;">
 					<img src="public/img/loading.gif" >
 				</div>
 				
@@ -55,6 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		
 			<div class="col-md-3">
+					<h4 class="timedate" style="color:#999"></h4>
 					<div class="input-group ">
 	      				<input type="text" class="form-control" id="event_date_text">
 	      				<span class="input-group-btn">
