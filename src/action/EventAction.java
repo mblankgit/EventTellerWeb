@@ -1,5 +1,7 @@
 package action;
 
+import index.EventIndex;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +10,6 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
 import db.Event;
-import db.EventInfo;
 
 public class EventAction extends ActionSupport{
 	
@@ -68,7 +69,6 @@ public class EventAction extends ActionSupport{
 	}
 
 
-	@SuppressWarnings("unchecked")
 	public String getDayEventList(){
 		int topic = getSubTopic();
 		int batch = 50;
@@ -84,35 +84,9 @@ public class EventAction extends ActionSupport{
 				e.printStackTrace();
 			}
 		}
-		long to_day = util.Util.getDayGMT8(dt);
-		
-		String hql = "from EventInfo as obj where obj.day = " + to_day + "and obj.topic = " + topic + " order by obj.number desc";
-		util.Db db = new util.Db();
-		List<EventInfo> eis = db.getElement(hql, 0, batch);
-		for(EventInfo ei : eis){
-			String getet = "from Event as obj where obj.id = " + ei.getId();
-			Event et = (Event) db.getElementById(getet);
-			if(et == null || (et.getContent() == null || et.getContent().length() < 10)){
-				continue;
-			}
-			et.setContent(et.getContent().replace("!##!", "<p>"));
-			et.setContent(et.getContent().substring(0,Math.min(et.getContent().length(), 200)));
-			ets.add(et);
-		}
-		
-		System.out.println(subtopic);
-		
-//		String hql = "from Event as obj where obj.day = " + to_day + " and obj.topic = " + topic + " order by obj.number desc ";
-//		util.Db db = new util.Db();
-//		ets = db.getElement(hql,0,batch);
-//		for(Event et : ets){
-//			if(et.getContent() == null || et.getContent().length() < 10){
-//				continue;
-//			}
-//			et.setContent(et.getContent().replace("!##!", "<p>"));
-//			et.setContent(et.getContent().substring(0,Math.min(et.getContent().length(), 200)));
-//		}
-		db.close();		
+		int to_day = util.Util.getDayGMT8(dt);
+		EventIndex ei = new EventIndex();
+		ets = ei.queryEvents(null,to_day,topic, 0, batch, "et_number", "desc");
 		return "success";
 	}
 

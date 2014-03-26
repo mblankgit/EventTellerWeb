@@ -45,7 +45,7 @@ public class TopicAction {
 		if(pagenum == null || pagenum.length() == 0){
 			pagenum = "1";
 		}
-		String sql = "from TopicInfo as obj order by obj.number desc";
+		String sql = "from TopicInfo as obj order by obj.endDay desc, obj.number desc";
 		util.Db db = new util.Db();
 		List<TopicInfo> tis = db.getElement(sql, (Integer.parseInt(pagenum) - 1 )* BatchSize, BatchSize);
 		for(TopicInfo ti : tis){

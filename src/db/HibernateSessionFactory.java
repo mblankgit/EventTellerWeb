@@ -37,6 +37,7 @@ public class HibernateSessionFactory {
 			e.printStackTrace();
 		}
     }
+	
     private HibernateSessionFactory() {
     }
 	

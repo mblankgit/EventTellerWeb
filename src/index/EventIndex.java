@@ -27,11 +27,21 @@ public class EventIndex {
 	
 	
 	@SuppressWarnings("deprecation")
-	public List<Event> queryEvents(String queryStr,int start, int num,String sort, String order){
+	public List<Event> queryEvents(String title,int day,int topic,int start, int num,String sort, String order){
 		List<Event> res = new ArrayList<Event>();
 		SolrServer server = new HttpSolrServer(solrUrl);
-		SolrQuery query =new SolrQuery();  
-        query.setQuery(queryStr);
+		SolrQuery query =new SolrQuery();
+		if(title == null){
+			query.setQuery("et_day:" + day);
+		}else{
+			query.setQuery("et_title:" + title);
+		}
+		if(day > 0){
+			query.addFilterQuery("et_day" + ":" + day);
+		}
+		if(topic > 0){
+			query.addFilterQuery("et_topic"+":" + topic);
+		}
 		query.setStart(start);
 		query.setRows(num);
 		if(sort != null){
@@ -43,16 +53,16 @@ public class EventIndex {
 		}
 		try {
 			QueryResponse response = server.query(query);
-			SolrDocumentList docs = response.getResults();
+			SolrDocumentList docs = response.getResults();			
 			for (SolrDocument doc : docs) { 
 				int id = Integer.parseInt(doc.getFieldValue("id").toString());
-				String title = doc.getFieldValue("et_title").toString();
+				String tl = doc.getFieldValue("et_title").toString();
 				String time = doc.getFieldValue("et_pubTime").toString();
-				String summary = doc.getFieldValue("et_summary").toString();
+				String summary = doc.getFieldValue("et_summary").toString().replace("!##!", "\n");
 				String number = doc.getFieldValue("et_number").toString();
 				Event et = new Event();
 				et.setId(id);
-				et.setTitle(title);
+				et.setTitle(tl);
 				et.setPubtime(new Date(time));
 				et.setContent(summary);
 				et.setNumber(Integer.parseInt(number));
@@ -60,6 +70,7 @@ public class EventIndex {
 			}
 		}catch(Exception e){
 			System.out.println("error...");
+			e.printStackTrace();
 			return res;
 		}
 		return res;

@@ -21,7 +21,7 @@ function showResults(events){
     	html += "<h4>" + events[i].title + "</a>";
     	html += "<span class=\"label label-warning pull-right\">" + events[i].number +"</span></h4>";
     	html += "<h5><small>" + events[i].pubtime.replace("T"," ") + "</small></h5>";
-    	html += "<p>" + events[i].content + "</p>";
+    	html += "<p>" + events[i].content.substring(0,Math.min(251,events[i].content.length)).replace("!##!","\n") + "</p>";
 	}			
 	html += "</div>";	
 	return html;       	
