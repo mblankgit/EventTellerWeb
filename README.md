@@ -1,4 +1,4 @@
 EventTellerWeb
 ==============
 
-WebSite of the EventTeller
+A WebSite of the EventTeller
