@@ -26,7 +26,6 @@ public class EventIndex {
 	}
 	
 	
-	@SuppressWarnings("deprecation")
 	public List<Event> queryEvents(String title,int day,int topic,int start, int num,String sort, String order){
 		List<Event> res = new ArrayList<Event>();
 		SolrServer server = new HttpSolrServer(solrUrl);
@@ -57,13 +56,13 @@ public class EventIndex {
 			for (SolrDocument doc : docs) { 
 				int id = Integer.parseInt(doc.getFieldValue("id").toString());
 				String tl = doc.getFieldValue("et_title").toString();
-				String time = doc.getFieldValue("et_pubTime").toString();
+				Date time = (Date)doc.getFieldValue("et_pubTime");
 				String summary = doc.getFieldValue("et_summary").toString().replace("!##!", "\n");
 				String number = doc.getFieldValue("et_number").toString();
 				Event et = new Event();
 				et.setId(id);
 				et.setTitle(tl);
-				et.setPubtime(new Date(time));
+				et.setPubtime(time);
 				et.setContent(summary);
 				et.setNumber(Integer.parseInt(number));
 				res.add(et);

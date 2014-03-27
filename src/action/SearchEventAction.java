@@ -42,6 +42,11 @@ public class SearchEventAction {
 		results = new ArrayList<Event>();
 		EventIndex ei = new EventIndex();
 		results = ei.queryEvents(EventQuery,-1,-1, 0, SearchBatchSize, null,"desc");
+		for(Event et : results){
+			if(et.getContent() != null){
+				et.setContent(et.getContent().substring(0,Math.min(261, et.getContent().length())).replace("!##!", "\n"));
+			}
+		}
 		return "success";
 	}
 
