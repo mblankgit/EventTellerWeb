@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
@@ -23,6 +24,37 @@ public class EventIndex {
 	
 	public EventIndex(){
 		solrUrl = "http://222.29.197.239:8080/solr";
+	}
+	
+	public Event getEventById(int id){
+		Event res = null;
+		SolrServer server = new HttpSolrServer(solrUrl);
+		SolrQuery query =new SolrQuery();
+		query.setQuery("id:" + id);
+		QueryResponse response;
+		try {
+			response = server.query(query);
+			SolrDocumentList docs = response.getResults();	
+			if(docs.size() == 1){
+				SolrDocument doc = docs.get(0);
+				String tl = doc.getFieldValue("et_title").toString();
+				Date time = (Date)doc.getFieldValue("et_pubTime");
+				String summary = doc.getFieldValue("et_summary").toString().replace("!##!", "\n");
+				String number = doc.getFieldValue("et_number").toString();
+				String imgs = doc.getFieldValue("et_imgs").toString();
+				res = new Event();
+				res.setId(id);
+				res.setImgs(imgs);
+				res.setTitle(tl);
+				res.setPubtime(time);
+				res.setContent(summary);
+				res.setNumber(Integer.parseInt(number));
+			}
+		} catch (SolrServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	

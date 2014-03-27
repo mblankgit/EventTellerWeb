@@ -1,5 +1,7 @@
 package action;
 
+import index.EventIndex;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,17 +60,16 @@ public class GetEventAction {
 		///get imgs
 		if(et != null && et.getImgs().length() > 0){
 			String[] tmps = et.getImgs().split("!##!");
-			for(String tmp : tmps){
-				if(tmp != null && tmp.length() > 5){
-					imgs.add(tmp);
-					break;
-				}
+			if(tmps.length > 1 && tmps[1].length() > 10){
+				imgs.add(tmps[1]);
+			}else if(tmps.length > 0 && tmps[0].length() > 10){
+				imgs.add(tmps[0]);
 			}
 		}
 		
 		///get paragraphs
 		if(et != null && et.getContent().length() > 0){
-			String[] tmps = et.getContent().split("!##!");
+			String[] tmps = et.getContent().split("\n");
 			for(String tmp : tmps){
 				if(tmp.length() > 0){
 					pas.add(tmp);
@@ -78,11 +79,15 @@ public class GetEventAction {
 	}
 
 	public String getEvent(){
-		String sql = "from Event as obj where obj.id = " + eid;
-		util.Db db = new util.Db();
-		curet = (Event)(db.getElementById(sql));
+//		String sql = "from Event as obj where obj.id = " + eid;
+//		util.Db db = new util.Db();
+//		curet = (Event)(db.getElementById(sql));
+		
+		EventIndex ei = new EventIndex();
+		curet = ei.getEventById(eid);
+		
 		getImgs(curet);		
-		db.close();
+//		db.close();
 		return "success";
 	}
 
