@@ -18,29 +18,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="EventTeller Index">
 	
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 
   </head>
   
   <body>
     <jsp:include page="header.jsp"/>
     	
-    <div class="container">
-		
-		<div class="row">
-			
-			<div class="col-md-6">
-				<div class="row" id = "chart1"></div>
+    <div class="mobile-warp" style="margin-top:-20px;">			
+		<div class="mobile-body">
+			<div class="mobile-inner">
+				<div class="mobile_feature_01">
+					<h4>实时页面爬取 <span class="i1"></span> 个</h4>
+					<p>我们实现的网页爬虫一直<br>
+	                在孜孜不倦地运转着</p>
+				</div>
+				<div class="mobile_feature_02">
+					<h4>事件聚合 <span class="i2">2896594</span> 个</h4>
+					<p>网页主体分析进程将相似<br>
+	                新闻进行聚合整理</p>
+				</div>
+				<div class="mobile_feature_03">
+					<h4>话题生成 <span class="i3">1222225</span> 个</h4>
+					<p>新生事件是旧话题的延伸<br>
+	                或者是新话题的开创</p>
+				</div>
+				<div class="mobile_feature_04">
+					<div id="chart1" style="width:400px; height: 400px;float:left;">
+						
+					</div>
+					<div style="float:left;">
+						<h4 style="padding-left:140px;">来源 <span class="i4">29</span> 个新闻网站</h4>
+						<p style="padding-left:145px;">我们的新闻来源于高权威<br>
+		                高可信度的新闻网站</p>
+	                </div>
+				</div>
 			</div>
-			
-			<div class="col-md-6">
-				<div class="row" id="chart2"></div>
-			</div>
-		
-		</div>
-			
+		</div>			
    	</div>
    		
-  	 <jsp:include page="footer.html"/>
+  	<jsp:include page="footer.html"/>
     
     <script src="public/js/jquery.js"></script>
     <script src="public/js/jquery-ui.js"></script>

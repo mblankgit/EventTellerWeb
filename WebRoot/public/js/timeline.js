@@ -1,7 +1,7 @@
 $(function(){
 	createStoryJS({
         type:       'timeline',
-        height:     '600',
+        height:     '550',
         source:     'public/Events.json',
         embed_id:   'my-timeline',
         lang: 'zh-cn',

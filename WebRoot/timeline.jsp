@@ -42,6 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<script src="public/js/bootstrap.min.js"></script>
    	<script src="public/js/timeline.min.js"></script>
    	<script src="public/js/timeline.js"></script>
+   	
 	<script src="public/js/search.js"></script>
   </body>
 </html>
