@@ -36,6 +36,25 @@ public class TopicAction {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
+	
+	private String processKeyWord(String key,int N){
+		String[] its = key.split(",");
+		StringBuffer res = new StringBuffer();
+		int count = 0;
+		for(String it : its){
+			String[] subs = it.split(":");
+			if(subs.length == 2){
+				res.append(subs[0] + " ");
+				count++;
+				if(count > N){
+					break;
+				}
+			}
+		}
+		return res.toString();
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public String showTopics(){
 		topics = new ArrayList<Topic>();
@@ -52,6 +71,7 @@ public class TopicAction {
 			sql = "from Topic as obj where obj.id = " + ti.getId();
 			Topic tp = (Topic) db.getElementById(sql);
 			if(tp != null){
+				tp.setSummary(processKeyWord(tp.getKeyWords(),10));
 				topics.add(tp);
 			}
 		}

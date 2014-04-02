@@ -15,16 +15,13 @@ public class Topic implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6027853542185375763L;
 	private Integer id;
 	private String keyWords;
 	private String summary;
 	private Date startTime;
 	private Date endTime;
 	private Integer number;
+	private String timeNumber;
 
 	// Constructors
 
@@ -39,13 +36,14 @@ public class Topic implements java.io.Serializable {
 
 	/** full constructor */
 	public Topic(Integer id, String keyWords, String summary, Date startTime,
-			Date endTime, Integer number) {
+			Date endTime, Integer number, String timeNumber) {
 		this.id = id;
 		this.keyWords = keyWords;
 		this.summary = summary;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.number = number;
+		this.timeNumber = timeNumber;
 	}
 
 	// Property accessors
@@ -102,6 +100,15 @@ public class Topic implements java.io.Serializable {
 
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+
+	@Column(name = "timeNumber", length = 16777215)
+	public String getTimeNumber() {
+		return this.timeNumber;
+	}
+
+	public void setTimeNumber(String timeNumber) {
+		this.timeNumber = timeNumber;
 	}
 
 }
