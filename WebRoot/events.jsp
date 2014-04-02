@@ -56,6 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		
 			<div class="col-md-3">
+					<h4 class="timedate" style="color:#999"></h4>
 					<div class="input-group ">
 	      				<input type="text" class="form-control" id="event_date_text">
 	      				<span class="input-group-btn">
