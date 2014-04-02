@@ -1,19 +1,4 @@
 $(function(){
-<<<<<<< HEAD
-	var settings = {
-        "size" : {
-            "grid" : 4
-        },
-        "options" : {
-            "color" : "random-light",
-            "printMultiplier" : 3
-        },
-        "font" : "Futura, Helvetica, sans-serif",
-        "shape" : "circle"
-    }
-    $("#wordcloud2").awesomeCloud(settings);
-=======
-
     var cap = 0;
     setInterval(function(){
         cap = (cap+1) % 4;
@@ -64,6 +49,4 @@ $(function(){
         });
         $(".wordcd").append(li);
     };
-
->>>>>>> ef2033b23dfe6f909a728959b88a4581db66839e
 });
