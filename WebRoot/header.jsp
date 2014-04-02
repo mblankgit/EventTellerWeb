@@ -12,14 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    
 		    <div class="collapse navbar-collapse">
 		    	 <ul class="nav navbar-nav"  id="navbar_header">
-<<<<<<< HEAD
-			        <li><a href="">Home</a></li>
-			        <li><a href="events">Event</a></li>
-			        <li><a href="topics">Topic</a></li>
-			        <li><a href="timeline">Timeline</a></li>
-			        <li><a href="sts">Sts</a></li>
-			    </ul>
-=======
 			        <li>
 			        	<a href="">
 			        		首页
@@ -40,8 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        	</a>
 			        </li>
       			</ul>
->>>>>>> ef2033b23dfe6f909a728959b88a4581db66839e
-      			
       			<form class="navbar-form navbar-right" method="post" role="search" action="search">
 	        		<div class="form-group">
 	          			<input type="text" class="form-control" placeholder="Search Events" name="EventQuery" id="EventQuery">
