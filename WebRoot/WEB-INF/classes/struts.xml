@@ -56,6 +56,10 @@
         <action name="SelectTopics" class="action.TopicAction" method="showTopics">
             <result type="json"></result>
         </action>
+	
+	<action name="ShowTopicCharts" class="action.GetTopicAction" method="getOneTopic">
+            <result type="json"></result>
+        </action>
         
         
     </package>

@@ -13,7 +13,7 @@
 #index-wrap .index-body ul.index-feature li{float:left;width:25%;text-align:center;line-height:200%;padding:45px 0;font-size:14px;color:#999}#index-wrap .index-body ul.index-feature li img{border-radius:10px;width:100px;height:100px}
 #index-wrap .index-body ul.index-feature li h4{color:#333;font-size:20px;font-weight:normal;margin-top:20px}
 #index-wrap .index-body ul.index-feature li i{font-size:7.5em;}
-#index-wrap .index-body .index-say{padding-bottom:20px;border:solid 1px #e1e1e1;border-width:1px 0;background:#f4f4f4 url("../img/div-grey-top.png?v=3.0.5") no-repeat center top}#index-wrap .index-body .index-say .index-say-inner{height:460px;width:980px;margin:0 auto;position:relative}#index-wrap .index-body .index-say .index-say-inner .index-say-title{margin:0;padding:30px 0 30px 0;text-align:center;font-weight:normal}
+#index-wrap .index-body .index-say{padding-bottom:20px;border:solid 1px #e1e1e1;border-width:1px 0;background:#fff url("../img/div-grey-top.png?v=3.0.5") no-repeat center top}#index-wrap .index-body .index-say .index-say-inner{height:460px;width:980px;margin:0 auto;position:relative}#index-wrap .index-body .index-say .index-say-inner .index-say-title{margin:0;padding:30px 0 30px 0;text-align:center;font-weight:normal}
 #index-wrap .index-body .index-say .index-say-inner .index-say-carousel{width:980px;color:#979797;font-size:16px;padding-bottom:30px}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel .carousel .item{height:140px}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel .carousel .item span.people{left:0;top:0;z-index:100;position:absolute;width:170px;text-align:center;font-size:16px;color:#333}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel .carousel .item span.people img{width:45px}
 #index-wrap .index-body .index-say .index-say-inner .index-say-carousel .carousel .item p{font-size:16px;margin-left:170px;margin-right:30px;padding-top:25px;line-height:240%}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel .carousel .item p i{font-size:.8em;color:#ddd}
 #index-wrap .index-body .index-say .index-say-inner .index-say-carousel ol.carousel-indicators{bottom:-30px;top:auto;left:50%}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel ol.carousel-indicators li{cursor:pointer;margin:5px;border-width:2px;border-color:#ddd}#index-wrap .index-body .index-say .index-say-inner .index-say-carousel ol.carousel-indicators li.active{width:10px;height:10px;background-color:#ddd}
@@ -123,3 +123,7 @@
 .i2 {color: #5cb85c}
 .i3 {color: #f0ad4e}
 .i4 {color: #d9534f}
+
+#results .nav li {width:25%; text-align: center;}
+
+.loadimg {text-align: center;}

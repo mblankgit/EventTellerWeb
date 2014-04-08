@@ -27,12 +27,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
      <div class="container">
      	<div class="row">
-     		<div class="col-md-8">
-     			<div  id = "loadimg" style="display: none;">
+     		<div class="col-md-12" >
+     			<div  id = "loadimg" style="text-align:center; display: none;">
 					<img src="public/img/loading.gif" >
 				</div>
 				<br>
-				<div class="container" id = "topics"></div>
+				<div id = "topics" style="min-height:400px;"></div>
 				
 				<ul class="pager">
 				  <li class="previous" id="pretopic"><a href="">Previous</a></li>

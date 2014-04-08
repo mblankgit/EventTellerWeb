@@ -21,7 +21,6 @@ $(function(){
             console.log()
             $(".list-group-item:eq("+index+")").trigger("click");
         }, 5000);
-
     });
 
     var settings = {

@@ -9,6 +9,12 @@ $(document).ready(function() {
     selectNews(subtopic);
 });
 
+$("#newcomment").click(function(){
+    $.post("http://222.29.197.240:8080/ControAnalysis/TopHit", {c: 100, t: new Date().Format("yyyy-MM-dd")}, function(data){
+        console.log(data);
+    });
+});
+
 Date.prototype.Format = function (fmt) { //author: meizz 
     var o = {
         "M+": this.getMonth() + 1, //月份 

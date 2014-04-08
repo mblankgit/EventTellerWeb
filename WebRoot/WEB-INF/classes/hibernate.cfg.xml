@@ -29,6 +29,7 @@
 		<mapping class="db.EventTopicRelation" />
 		<mapping class="db.TopicStatus" />
 		<mapping class="db.TopicInfo" />
+		<mapping class="db.EventSim" />
 	</session-factory>
 
 </hibernate-configuration>

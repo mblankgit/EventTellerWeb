@@ -65,14 +65,14 @@ $('#nexttopic').click(
     function combineListTopics(topics){
     	var html = "";
     	if(topics == null || topics.length == 0){
-    		html = "<div class=\"col-md-8\"><div class=\"alert alert-danger\"><strong>Sorry!</strong> No Topics to show.</div></div>";
+    		html = "<div class=\"col-md-12\"><div class=\"alert alert-danger\"><strong>Sorry!</strong> No Topics to show.</div></div>";
     		$('#nexttopic').attr("class","next disabled");
     		return html;
     	}
 		for(var i = 0 ;i < topics.length;i++){
-        	html +=  "<div class=\"col-md-8\">";
+        	html +=  "<div class=\"col-md-12\">";
         	html += "<a href=\"show_topic?tid=" + topics[i].id + "\" target=\"_blank\">";
-        	html += "<h4>" + topics[i].keyWords + "</a>";
+        	html += "<h4>" + topics[i].summary + "</a>";
         	html += "<span class=\"badge badge-warning pull-right\">" + topics[i].number +"</span></h4>";
         	html += "<br>";
         	html += "<h5><span class=\"label label-primary\">From</span><small> " + topics[i].startTime.replace("T"," ") + "</small>";

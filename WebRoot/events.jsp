@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><a href="">科技</a></li>
 			<li><a href="">教育</a></li>
 			<li><a href="">法律</a></li>
+			<li id="newcomment"><a href="javascript:;">热议新闻</a></li>
 		</ul>
 		
 		<p></p>

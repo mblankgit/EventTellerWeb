@@ -18,38 +18,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/jquery-ui.css" />
+	<link rel="stylesheet" href="public/css/style.css" />
+	<link rel="stylesheet" href="public/css/timeline-v.css" />
   </head>
   
   <body>
      <jsp:include page="header.jsp"/>
      
      <div class="container" id = "results">
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li data-t="num1" class="active"><a href="javascript:;">列表视图</a></li>
+				<li data-t="num2"><a href="javascript:;">时间线视图</a></li>
+				<li data-t="num3"><a href="javascript:;">热度跟踪</a></li>
+				<li data-t="num4"><a href="javascript:;">关键词云图</a></li>
+			</ul>
+		</div>
+	
+		<div class="row">
 			<s:if test="events == null || events.length() == 0">
 				<br />
-				<div class="col-md-6">
-					<div class="alert alert-danger"><strong>Sorry!</strong> No Results Found..</div>					
+				<div class="col-md-12">
+					<div class="alert alert-danger"><strong>Sorry!</strong> No Results Found..</div>
 				</div>
 			</s:if>
 			<s:else>
-				<div class="col-md-9">
+				<div class="col-md-12">
+					<div class="pc" id="num1">
 					<s:iterator value="events" id = "Event">
+						<div class="n1item">
 						<hr class="soften" />
 		        		<h4>
-							<a href="show_events?eid=<s:property value="#Event.id" />" target="_blank"><s:property value="#Event.title"/></a>
+							<a class="title" href="show_events?eid=<s:property value="#Event.id" />" target="_blank"><s:property value="#Event.title"/></a>
 		        			<span class="label label-warning pull-right"><s:property value="#Event.number" /></span>
 		        		</h4>
 		        		<h5><small><s:date name="#Event.pubtime" format="yyyy-MM-dd hh:mm:ss" /></small></h5>
 		        		<p><s:property value="#Event.content" /></p>
+		        		</div>
 					</s:iterator>
+					</div>
+					<div class="pc" id="num2">
+						<div id="timeline" style="margin-top:20px;">
+							
+						</div>
+					</div>
+					<div class="pc" id="num3">
+						<div  class = "loadimg" style="display: none;">
+							<img src="public/img/loading.gif" >
+						</div>
+						<div id="timeNumberChart"></div>
+					</div>
+					<div class="pc" id="num4">
+						<div  class = "loadimg" style="display: none;">
+							<img src="public/img/loading.gif" >
+						</div>
+						<div id="wordCloudChart" style="height:400px; margin-top:20px; border:1px solid #ccc; border-radius:5px; padding:10px; display:none"></div>
+					</div>
 				</div>
 			</s:else>	
 		</div>
+
+		</div>
      
-     <jsp:include page="footer.html"/>
+    <jsp:include page="footer.html"/>
      
   	<script src="public/js/jquery.js"></script>
     <script src="public/js/jquery-ui.js"></script>
    	<script src="public/js/bootstrap.min.js"></script>
+   	<script src="public/js/timeline-v-min.js"></script>
 	<script src="public/js/search.js"></script>
+	<script src="public/js/awesomeCloud.min.js"></script>
+	<script src="public/js/highcharts.js"></script>
+	<script src="public/js/showTopic.js"></script>
   </body>
 </html>
