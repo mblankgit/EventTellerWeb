@@ -16,19 +16,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/style.css">
-	<!--[if lte IE 8]
-	<script>
-	alert("您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！");
-	</script>
-	-->
-
   </head>
   
   <body>
-    <!--[if lte IE 8]
-    <h1 style="text-align:center">您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！"</h1>
-    -->
-	<jsp:include page="header.jsp"/>
+    <!--[if lte IE 8]>
+	<SCRIPT LANGUAGE="Javascript">
+	alert("您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！");
+	</SCRIPT>
+	<h1 style="text-align:center; margin-bottom:100px">您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！</h1>
+	<![endif]-->
+
+    <jsp:include page="header.jsp"/>
 	
 	<div class="wrap-all" style="margin-top:-20px">
 		<div class="inner">
