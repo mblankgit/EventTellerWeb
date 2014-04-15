@@ -27,9 +27,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
      <div class="container" id = "results">
 		<div class="row">
-			<ul class="nav nav-tabs">
-				<li data-t="num1" class="active"><a href="javascript:;">列表视图</a></li>
-				<li data-t="num2"><a href="javascript:;">时间线视图</a></li>
+			<ul class="nav nav-tabs"><!-- 
+				<li data-t="num1" class="active"><a href="javascript:;">列表视图</a></li> -->
+				<li data-t="num2" class="active"><a href="javascript:;">时间线视图</a></li>
 				<li data-t="num3"><a href="javascript:;">热度跟踪</a></li>
 				<li data-t="num4"><a href="javascript:;">关键词云图</a></li>
 			</ul>
@@ -46,15 +46,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-md-12">
 					<div class="pc" id="num1">
 					<s:iterator value="events" id = "Event">
-						<div class="n1item">
+					<div class="n1item">
 						<hr class="soften" />
 		        		<h4>
 							<a class="title" href="show_events?eid=<s:property value="#Event.id" />" target="_blank"><s:property value="#Event.title"/></a>
-		        			<span class="label label-warning pull-right"><s:property value="#Event.number" /></span>
+		        			<span class="lnumber label label-warning pull-right"><s:property value="#Event.number" /></span>
 		        		</h4>
 		        		<h5><small><s:date name="#Event.pubtime" format="yyyy-MM-dd hh:mm:ss" /></small></h5>
 		        		<p><s:property value="#Event.content" /></p>
-		        		</div>
+		        		<h6 style="display:none;"><s:property value="#Event.imgs" /></h6>
+		        	</div>
 					</s:iterator>
 					</div>
 					<div class="pc" id="num2">
@@ -62,11 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 						</div>
 					</div>
-					<div class="pc" id="num3">
-						<div  class = "loadimg" style="display: none;">
-							<img src="public/img/loading.gif" >
-						</div>
+					<div class="pc" id="num3" style="position:relative;">
 						<div id="timeNumberChart"></div>
+						<div id="reporting" style="width:200px; height:100px; border:1px solid #000; position:absolute; left:0; top:0; display:none;"></div>
 					</div>
 					<div class="pc" id="num4">
 						<div  class = "loadimg" style="display: none;">

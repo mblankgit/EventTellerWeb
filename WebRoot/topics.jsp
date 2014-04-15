@@ -19,16 +19,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/jquery-ui.css" />
+	<link rel="stylesheet" href="public/chronoline/chronoline.css" />
   </head>
   
   <body>
      <jsp:include page="header.jsp"/>
-     
+     <button class="btn btn-default" style="position:fixed; left:0px; top:100px;" id="linebtn">LINE</button>
      
      <div class="container">
      	<div class="row">
+     		<div class="col-md-12" id="panel">
+     		</div>
+     	</div>
+     	<div class="row">
      		<div class="col-md-12" >
-     			<div  id = "loadimg" style="text-align:center; display: none;">
+     			<div id = "loadimg" style="text-align:center; display: none;">
 					<img src="public/img/loading.gif" >
 				</div>
 				<br>
@@ -52,6 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="public/js/jquery-ui.js"></script>
    	<script src="public/js/bootstrap.min.js"></script>
 	<script src="public/js/search.js"></script>
+	<script src="public/chronoline/raphael-min.js"></script>
+	<script src="public/chronoline/chronoline.js"></script>
 	<script src="public/js/topics.js"></script>
   </body>
 </html>
