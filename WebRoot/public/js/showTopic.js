@@ -14,25 +14,28 @@ $(function(){
 		generateTimeNumber();
 	});
 
-
 	$(".loadimg").show();
-	$.post(
-			'ShowTopicCharts',
-			{
-				tid:getUrlParam('tid')
-			},
-			function(tp){
-				$(".loadimg").hide();
-				
-				$("li[data-t='num4']").click(function(){
-					generateWordCloud(tp);
-				});
+	$.post('ShowTopicCharts', { tid:getUrlParam('tid') }, function(tp){
+			$(".loadimg").hide();
+			
+			$("li[data-t='num4']").click(function(){
+				generateWordCloud(tp);
+			});
 
-				$("li[data-t='num4'].active").trigger("click");
-
-				//combineHtml(tp);
-			}
+			$("li[data-t='num4'].active").trigger("click");
+		}
 	);
+
+	$('.timeline_element').on("click", function(){
+		var h4d = $(this).find("h4[data-id]").data("id");
+		var title = $(".n1item:eq("+h4d+") h4 a").text(),
+		content = $(".n1item:eq("+h4d+") p").text();
+				
+		$("#myModal .title").text(title);
+		$("#myModal .content").text(content);
+
+		$("#myModal").modal('show');
+	});
 
 	Highcharts.setOptions({
 		lang: {
@@ -46,27 +49,19 @@ $(function(){
 function generateTimeLine(){
 	var tdata = [];
 
-	$("#num1 .n1item").each(function(item, i){
+	$("#num1 .n1item").each(function(index, i){
 		var imgsarr = $(this).find("h6").text().split("!##!");
 		imgsarr.shift();
 		var type = "blog_post";
-		// if (imgsarr.length == 1) {
-		// 	type = "blog_post";
-		// 	imgsarr = imgsarr[0];
-		// }
-		// else {
-		// 	type = "slider";
-		// }
 		tdata.push({
 	        type:     type,
 	        date:     $(this).find("h5 small").text(),
 	        title:    $(this).find("a.title").text(),
 	        width:    350,
-	        content:  "<h4><a target=_blank href='"+$(this).find("a.title").attr("href")+"'>"+$(this).find("a.title").text()+"</a></h4>"+$(this).find("p").text().substring(0, 100),
+	        content:  "<h4 data-id='"+index+"'><a target=_blank href='"+$(this).find("a.title").attr("href")+"'>"+$(this).find("a.title").text()+"</a></h4>"+$(this).find("p").text().substring(0, 100),
 	    	images: imgsarr
 	    });
 	});
-
 
 	var timeline = new Timeline($('#timeline'), tdata);
 	timeline.setOptions({
@@ -109,23 +104,20 @@ function generateTimeNumber(){
 		begin: 0,
 		hot: 0,
 	}
+
+	var colors = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5', '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5'];
+	
 	$("#num1 .n1item").each(function(item, i){
 		var imgsarr = $(this).find("h6").text().split("!##!");
 		var htime = new Date($(this).find("h5 small").text()).getTime();
 		var hot = $(this).find(".lnumber").text();
 		imgsarr.shift();
-		// if (imgsarr.length == 1) {
-		// 	type = "blog_post";
-		// 	imgsarr = imgsarr[0];
-		// }
-		// else {
-		// 	type = "slider";
-		// }
 		if (htime - tmp.begin > 10 * 24 * 60 * 60 * 1000){
 			var point = {};
 			var date = new Date(htime);
 			point.x = (Date.UTC(date.getUTCFullYear(), date.getUTCMonth()+1, date.getUTCDate()));
 			point.y = tmp.hot;
+			point.marker = {radius: 5 + Math.floor(Math.random() * 10)};
 			point.events = {
 				date:     $(this).find("h5 small").text(),
 	        	title:    $(this).find("a.title").text(),
@@ -133,6 +125,16 @@ function generateTimeNumber(){
 	    		images: imgsarr[0],
 	    		href: $(this).find("a.title").attr("href")
 			}
+			var c = colors[Math.floor(Math.random()*colors.length)];
+			point.marker.fillColor = c;
+			point.marker.lineColor = c;
+			point.marker.states = {
+				hover: {
+					radius : point.marker.radius + 4,
+					fillColor : c,
+					lineColor: c
+				}
+			};
 			chartData.push(point);
 
 			tmp.begin = htime;
@@ -164,15 +166,9 @@ function generateTimeNumber(){
                 point: {
                     events: {
                         click: function() {
-                       	
-                        	// var pointer = this;
-                        	// var left = pointer.plotX-110;
-                         //    if(left <0){
-                         //        left =0;
-                         //    }
-                         //    $("#reporting").show();
-                         //    $("#reporting").css("left",left + "px");
-                         //    $("#reporting").css("top",pointer.plotY+75 + "px");
+                        	var pointer = this;
+                        	window.location.href = "/ETW/" + pointer.events.href;
+                        	//console.log(pointer);
                         }
                     }
                 }
@@ -181,26 +177,18 @@ function generateTimeNumber(){
         tooltip: {
         	formatter: function(){
         		return '<p style="text-align:center"><b style="font-size:20px;"><a target=_blank href="'+this.point.events.href+'">'+ this.point.events.title +'</a></b></p>'+
-        		'<p style="width:100%; white-space:initial;">'+this.point.events.content.substring(0, 100)+'...</p><p style="text-align:center; white-space:initial;"><img src="'+this.point.events.images+'" style="max-width:270px; max-height:129px;"/></p>';
+        		'<p style="width:100%; white-space:initial;">'+this.point.events.content.substring(0, 100)+'...</p><p style="text-align:center; white-space:initial;"><img src="'+this.point.events.images+'" style="max-width:270px; max-height:129px; margin-top:20px;"/></p>';
         	},
-            // shared: true,
             useHTML: true,
-            // headerFormat: '<small>{point.key}</small><table>',
-            // pointFormat: '<tr><td>{series.name}: </td>' +
-            // '<td style="text-align: right"><b>{point.y} 热度</b></td></tr>',
-            // footerFormat: '</table>',
-            // valueDecimals: 2
         },
 		series:[{
 			name:"热度曲线",
-			data:[]
+			data: chartData
 		}]
 	});
 	
 	var chart = $('#timeNumberChart').highcharts();
-	
-    chart.series[0].setData(chartData);
-	
+    
     var i = 0;
     setInterval(function() {
     	if (i > 0) {
@@ -216,7 +204,6 @@ function generateTimeNumber(){
     }, 3000);
 
 }
-
 
 function getUrlParam(name){
 	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 

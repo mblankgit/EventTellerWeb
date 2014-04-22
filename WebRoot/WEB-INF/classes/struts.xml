@@ -39,6 +39,10 @@
     <action name="show_topic" class="action.GetTopicAction" method="getTopic" >
       <result name="success">/showTopic.jsp</result>
     </action>
+
+    <action name="stslines">
+      <result>/stslines.jsp</result>
+    </action>
     
     
   </package>

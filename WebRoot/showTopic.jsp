@@ -27,6 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
      <div class="container" id = "results">
 		<div class="row">
+			<h3><s:property value="title" /></h3>
+
 			<ul class="nav nav-tabs"><!-- 
 				<li data-t="num1" class="active"><a href="javascript:;">列表视图</a></li> -->
 				<li data-t="num2" class="active"><a href="javascript:;">时间线视图</a></li>
@@ -49,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="n1item">
 						<hr class="soften" />
 		        		<h4>
-							<a class="title" href="show_events?eid=<s:property value="#Event.id" />" target="_blank"><s:property value="#Event.title"/></a>
+							<a class="title" href="show_events?eid=<s:property value='#Event.id' />" target="_blank"><s:property value="#Event.title"/></a>
 		        			<span class="lnumber label label-warning pull-right"><s:property value="#Event.number" /></span>
 		        		</h4>
 		        		<h5><small><s:date name="#Event.pubtime" format="yyyy-MM-dd hh:mm:ss" /></small></h5>
@@ -78,6 +80,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		</div>
+
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title title"></h4>
+	      </div>
+	      <div class="modal-body">
+	        <p class="content"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
      
     <jsp:include page="footer.html"/>
      
