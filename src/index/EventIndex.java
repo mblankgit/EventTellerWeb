@@ -46,7 +46,7 @@ public class EventIndex {
 				res.setId(id);
 				res.setImgs(imgs);
 				res.setTitle(tl);
-				res.setPubtime(time);
+				res.setPubTime(time);
 				res.setContent(summary);
 				res.setNumber(Integer.parseInt(number));
 			}
@@ -94,7 +94,7 @@ public class EventIndex {
 				Event et = new Event();
 				et.setId(id);
 				et.setTitle(tl);
-				et.setPubtime(time);
+				et.setPubTime(time);
 				et.setContent(summary);
 				et.setNumber(Integer.parseInt(number));
 				res.add(et);

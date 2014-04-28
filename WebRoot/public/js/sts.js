@@ -1,60 +1,102 @@
+$(document).ready(function() {
+    var i1 = Math.floor(new Date().getTime()/1000) - 1396257661 + 4794759;
+    $(".i1").text(i1);
 
-	$(document).ready(function(){
-		
-		showChar1();
-		
-		
-	});
+    function q1(){
+        i1+= Math.floor(Math.random()*100);
+        $(".i1").text(i1);     
+        setTimeout(q1, 2000);
+    };
+
+    var i2 = Math.floor(new Date().getTime()/1000) - 1396257661 + 2896594;
+    $(".i2").text(i2);
+
+    function q2(){
+        i2 += 1;
+        $(".i2").text(i2);     
+        setTimeout(q2, 10000);
+    };
+
+    var i3 = Math.floor(new Date().getTime()/1000) - 1396257661 + 1222225;
+    $(".i3").text(i3);
+
+    function q3(){
+        i3 += 1;
+        $(".i3").text(i3);     
+        setTimeout(q1, 15000);
+    };
 
 
-function showChar1() { 
-	 $('#chart1').highcharts({
-         title: {
-             text: 'STS chart example one',
-             x: -20 //center
-         },
-//         subtitle: {
-//             text: 'Source: WorldClimate.com',
-//             x: -20
-//         },
-         xAxis: {
-             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-         },
-         credits: {
-        	 enabled: false
-         },
-         yAxis: {
-             title: {
-                 text: 'Temperature'
-             },
-             plotLines: [{
-                 value: 0,
-                 width: 1,
-                 color: '#808080'
-             }]
-         },
-         tooltip: {
-             valueSuffix: 'c'
-         },
-         legend: {
-             layout: 'vertical',
-             align: 'right',
-             verticalAlign: 'middle',
-             borderWidth: 0
-         },
-         series: [{
-             name: 'Tokyo',
-             data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-         }, {
-             name: 'New York',
-             data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-         }, {
-             name: 'Berlin',
-             data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-         }, {
-             name: 'London',
-             data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-         }]
-     });
+    (function(){
+        q1();
+        q2();
+        q3();
+    })();
+    
+    showChar1();
+});
+
+
+function showChar1() {
+    $('#chart1').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: "新闻数据源来源",
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                        enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '网页数',
+            data: [
+                ['163',     322040],
+                ['bjnews',      37703],
+                ['ce',      109847],
+                ['china',       192460],
+                ['chinacourt',    35245],
+                ['chinadaily',    17513],
+                ['chinanews', 532906],
+                ['cntv',        242731],
+                ['cyol',        52405],
+                ['dahe',        158375],
+                ['dffyw',       5167],
+                ['fabang',      13420],
+                ['gjzx',        88013],
+                ['HuanQiu',     205767],
+                ['ifeng',       317312],
+                ['jcrb',        22548],
+                ['legalinfo', 126],
+                ['msn',     67560],
+                ['mylegist',  181],
+                ['newschina', 75359],
+                ['people',      246790],
+                ['sina',        549986],
+                ['sohu',        354128],
+                ['southcn',     159837],
+                ['takungpao', 127994],
+                ['tencent',     213117],
+                ['xinhuanet', 494619],
+                ['yahoo',       91207],
+                {
+                    name: 'yangtse',
+                    y: 615507,
+                    sliced: true,
+                    selected: true
+                },
+            ]
+        }]
+    });
 }

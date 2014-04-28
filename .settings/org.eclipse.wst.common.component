@@ -2,7 +2,7 @@
     <wb-module deploy-name="ETW">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="ETW"/>
         <property name="java-output-path" value="/ETW/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="ETW"/>
     </wb-module>
 </project-modules>

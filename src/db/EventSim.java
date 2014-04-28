@@ -8,7 +8,6 @@ import javax.persistence.Table;
 /**
  * EventSim entity. @author MyEclipse Persistence Tools
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "EventSim", catalog = "EventTeller")
 public class EventSim implements java.io.Serializable {
@@ -18,6 +17,8 @@ public class EventSim implements java.io.Serializable {
 	private Integer fid;
 	private Integer sid;
 	private double score;
+	private String main;
+	private String object;
 
 	// Constructors
 
@@ -31,10 +32,13 @@ public class EventSim implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public EventSim(Integer fid, Integer sid, double score) {
+	public EventSim(Integer fid, Integer sid, double score, String main,
+			String object) {
 		this.fid = fid;
 		this.sid = sid;
 		this.score = score;
+		this.main = main;
+		this.object = object;
 	}
 
 	// Property accessors
@@ -64,6 +68,24 @@ public class EventSim implements java.io.Serializable {
 
 	public void setScore(double score) {
 		this.score = score;
+	}
+
+	@Column(name = "main", length = 256)
+	public String getMain() {
+		return this.main;
+	}
+
+	public void setMain(String main) {
+		this.main = main;
+	}
+
+	@Column(name = "object", length = 256)
+	public String getObject() {
+		return this.object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 }

@@ -15,13 +15,9 @@ public class Event implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2802306697508698109L;
 	private Integer id;
 	private String title;
-	private Date pubtime;
+	private Date pubTime;
 	private String content;
 	private String source;
 	private String imgs;
@@ -41,12 +37,12 @@ public class Event implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Event(Integer id, String title, Date pubtime, String content,
+	public Event(Integer id, String title, Date pubTime, String content,
 			String source, String imgs, Integer number, Integer day,
 			Integer topic) {
 		this.id = id;
 		this.title = title;
-		this.pubtime = pubtime;
+		this.pubTime = pubTime;
 		this.content = content;
 		this.source = source;
 		this.imgs = imgs;
@@ -75,13 +71,13 @@ public class Event implements java.io.Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "pubtime", length = 19)
-	public Date getPubtime() {
-		return this.pubtime;
+	@Column(name = "pubTime", length = 19)
+	public Date getPubTime() {
+		return this.pubTime;
 	}
 
-	public void setPubtime(Date pubtime) {
-		this.pubtime = pubtime;
+	public void setPubTime(Date pubTime) {
+		this.pubTime = pubTime;
 	}
 
 	@Column(name = "content", length = 16777215)

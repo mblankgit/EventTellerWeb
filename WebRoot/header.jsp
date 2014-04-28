@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-    <nav class="navbar navbar-default" role="navigation">
+      	<nav class="navbar navbar-default" role="navigation">
   		<div class="container">
 		    <div class="navbar-header">
 		    	<a class="navbar-brand" href="#">EventTeller</a>
@@ -31,7 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        		时间线
 			        	</a>
 			        </li>
+			       	<li>
+			        	<a href="word">
+			        		词语
+			        	</a>
+			        </li>
       			</ul>
+      			
       			<form class="navbar-form navbar-right" method="post" role="search" action="search">
 	        		<div class="form-group">
 	          			<input type="text" class="form-control" placeholder="Search Events" name="EventQuery" id="EventQuery">

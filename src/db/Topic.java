@@ -22,6 +22,8 @@ public class Topic implements java.io.Serializable {
 	private Date endTime;
 	private Integer number;
 	private String timeNumber;
+	private String main;
+	private String object;
 
 	// Constructors
 
@@ -36,7 +38,8 @@ public class Topic implements java.io.Serializable {
 
 	/** full constructor */
 	public Topic(Integer id, String keyWords, String summary, Date startTime,
-			Date endTime, Integer number, String timeNumber) {
+			Date endTime, Integer number, String timeNumber, String main,
+			String object) {
 		this.id = id;
 		this.keyWords = keyWords;
 		this.summary = summary;
@@ -44,6 +47,8 @@ public class Topic implements java.io.Serializable {
 		this.endTime = endTime;
 		this.number = number;
 		this.timeNumber = timeNumber;
+		this.main = main;
+		this.object = object;
 	}
 
 	// Property accessors
@@ -109,6 +114,24 @@ public class Topic implements java.io.Serializable {
 
 	public void setTimeNumber(String timeNumber) {
 		this.timeNumber = timeNumber;
+	}
+
+	@Column(name = "main", length = 256)
+	public String getMain() {
+		return this.main;
+	}
+
+	public void setMain(String main) {
+		this.main = main;
+	}
+
+	@Column(name = "object", length = 256)
+	public String getObject() {
+		return this.object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 }

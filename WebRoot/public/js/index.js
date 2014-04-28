@@ -1,4 +1,5 @@
 $(function(){
+
     var cap = 0;
     setInterval(function(){
         cap = (cap+1) % 4;
@@ -20,7 +21,6 @@ $(function(){
             console.log()
             $(".list-group-item:eq("+index+")").trigger("click");
         }, 5000);
-
     });
 
     var settings = {
@@ -49,4 +49,5 @@ $(function(){
         });
         $(".wordcd").append(li);
     };
+
 });

@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					</div>
 					<div style="float:left;">
-						<h4 style="padding-left:140px;">来源 <span class="i4">29</span> 个新闻网站</h4>
+						<h4 style="padding-left:140px;">来源多家知名新闻网站</h4>
 						<p style="padding-left:145px;">我们的新闻来源于高权威<br>
 		                高可信度的新闻网站</p>
 	                </div>

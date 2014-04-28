@@ -2,6 +2,8 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
+
+
 	<constant name="struts.devMode" value="true" />
  
   <package name="basicstruts2" extends="struts-default">
@@ -17,6 +19,10 @@
     <action name="events">
       <result>/events.jsp</result>
     </action>
+
+    <action name="timeline">
+      <result>/timeline.jsp</result>
+    </action>
     
     <action name="show_events" class="action.GetEventAction" method="getEvent" >
       <result name="success">/showEvents.jsp</result>
@@ -30,10 +36,15 @@
       <result>/topics.jsp</result>
     </action>
     
-    <action name="show_topic" class="action.GetTopicAction" method="getTopic" >
-      <result name="success">/showTopic.jsp</result>
+    <action name="show_topic" class="action.GetTopicAction" method="defaultLoad">
+      <result>/showTopic.jsp</result>
     </action>
     
+    <action name="word">
+    	<result>/word.jsp</result>
+    </action>
+    
+
     
   </package>
   
@@ -50,6 +61,30 @@
         <action name="SelectTopics" class="action.TopicAction" method="showTopics">
             <result type="json"></result>
         </action>
+	
+		<action name="ShowTopicCharts" class="action.GetTopicAction" method="getOneTopic">
+            <result type="json"></result>
+        </action>
+        
+        <action name="getOneTopic" class="action.GetTopicAction" method="getOneTopic">
+            <result type="json"></result>
+        </action>
+        
+        <action name="getTopicEvents" class="action.GetTopicAction" method="getTopicEvents">
+            <result type="json"></result>
+        </action>
+        
+        <action name="getWordTime" class="action.GetWordAction" method="getWordTime">
+            <result name="success" type="json"></result>
+        </action>
+        
+        <action name="getRelatedWord" class="action.GetWordAction" method="getRelatedWord">
+            <result name="success" type="json"></result>
+        </action>
+        
+         <action name="getEventsByIds" class="action.GetEventsAction" method="getEventsByIds">
+            <result name="success" type="json"></result>
+        </action>       
         
         
     </package>

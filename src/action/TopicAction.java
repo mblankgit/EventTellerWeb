@@ -57,6 +57,7 @@ public class TopicAction {
 	
 	@SuppressWarnings("unchecked")
 	public String showTopics(){
+		System.out.println(type);
 		topics = new ArrayList<Topic>();
 		if(type == null || type.length() == 0){
 			type = "1";
@@ -64,9 +65,10 @@ public class TopicAction {
 		if(pagenum == null || pagenum.length() == 0){
 			pagenum = "1";
 		}
-		String sql = "from TopicInfo as obj order by obj.endDay desc, obj.number desc";
+		String sql = "from TopicInfo as obj where obj.number < 400 order by obj.endDay desc, obj.number desc";
 		util.Db db = new util.Db();
 		List<TopicInfo> tis = db.getElement(sql, (Integer.parseInt(pagenum) - 1 )* BatchSize, BatchSize);
+		System.out.println(tis.size());
 		for(TopicInfo ti : tis){
 			sql = "from Topic as obj where obj.id = " + ti.getId();
 			Topic tp = (Topic) db.getElementById(sql);

@@ -14,10 +14,6 @@ public class EventInfo implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4582084713907113574L;
 	private Integer id;
 	private Integer number;
 	private Integer day;

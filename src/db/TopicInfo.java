@@ -14,14 +14,12 @@ public class TopicInfo implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7260470769377330711L;
 	private Integer id;
 	private Integer startDay;
 	private Integer endDay;
 	private Integer number;
+	private String main;
+	private String object;
 
 	// Constructors
 
@@ -36,11 +34,13 @@ public class TopicInfo implements java.io.Serializable {
 
 	/** full constructor */
 	public TopicInfo(Integer id, Integer startDay, Integer endDay,
-			Integer number) {
+			Integer number, String main, String object) {
 		this.id = id;
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.number = number;
+		this.main = main;
+		this.object = object;
 	}
 
 	// Property accessors
@@ -79,6 +79,24 @@ public class TopicInfo implements java.io.Serializable {
 
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+
+	@Column(name = "main", length = 256)
+	public String getMain() {
+		return this.main;
+	}
+
+	public void setMain(String main) {
+		this.main = main;
+	}
+
+	@Column(name = "object", length = 256)
+	public String getObject() {
+		return this.object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 }

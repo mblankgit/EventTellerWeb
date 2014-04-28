@@ -15,10 +15,6 @@ public class UrlStatus implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3977078715953014038L;
 	private Integer id;
 	private short status;
 	private Date time;

@@ -14,10 +14,6 @@ public class EventStatus implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7406390521551217093L;
 	private Integer id;
 	private short status;
 

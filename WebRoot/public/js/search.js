@@ -28,7 +28,7 @@ function showResults(events){
 }
 
 function getResults(query){
-	 	 $("#results").hide();
+	 $("#results").hide();
 	 $("#loadimg").show();
 	 $.post(
 		'SearchEventJson',

@@ -14,10 +14,6 @@ public class TopicStatus implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6653803014619431914L;
 	private Integer id;
 	private short status;
 

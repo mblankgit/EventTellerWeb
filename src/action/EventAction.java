@@ -85,6 +85,7 @@ public class EventAction extends ActionSupport{
 			}
 		}
 		int to_day = util.Util.getDayGMT8(dt);
+		System.out.println(to_day);
 		EventIndex ei = new EventIndex();
 		ets = ei.queryEvents(null,to_day,topic, 0, batch, "et_number", "desc");
 		for(Event et : ets){
@@ -92,6 +93,7 @@ public class EventAction extends ActionSupport{
 				et.setContent(et.getContent().substring(0,Math.min(261, et.getContent().length())).replace("!##!", "\n"));
 			}
 		}
+		System.out.println(ets.size());
 		return "success";
 	}
 

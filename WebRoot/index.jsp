@@ -19,8 +19,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    
-	<jsp:include page="header.jsp"/>
+    <!--[if lte IE 8]>
+	<SCRIPT LANGUAGE="Javascript">
+	alert("您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！");
+	</SCRIPT>
+	<h1 style="text-align:center; margin-bottom:100px">您的浏览器过时了，请更换现代浏览器使用本系统，推荐使用Chrome浏览器！</h1>
+	<![endif]-->
+
+    <jsp:include page="header.jsp"/>
 	
 	<div class="wrap-all" style="margin-top:-20px">
 		<div class="inner">

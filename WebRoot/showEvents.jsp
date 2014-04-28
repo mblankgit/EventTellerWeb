@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</h3>
 					<div class="article-meta">
 						<span class="glyphicon glyphicon-dashboard"> </span>
-						<span class="published"><s:date name="curet.pubtime" format="yyyy-MM-dd hh:mm:ss"/>
+						<span class="published"><s:date name="curet.pubTime" format="yyyy-MM-dd hh:mm:ss"/>
 						</span>
 						<span class="pull-right badge"><s:property value="curet.number" /></span> 					
 					</div>

@@ -1,8 +1,10 @@
 package db;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -14,12 +16,7 @@ public class EventTopicRelation implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4782408097696495156L;
-	private Integer eid;
-	private Integer tid;
+	private EventTopicRelationId id;
 
 	// Constructors
 
@@ -27,35 +24,22 @@ public class EventTopicRelation implements java.io.Serializable {
 	public EventTopicRelation() {
 	}
 
-	/** minimal constructor */
-	public EventTopicRelation(Integer eid) {
-		this.eid = eid;
-	}
-
 	/** full constructor */
-	public EventTopicRelation(Integer eid, Integer tid) {
-		this.eid = eid;
-		this.tid = tid;
+	public EventTopicRelation(EventTopicRelationId id) {
+		this.id = id;
 	}
 
 	// Property accessors
-	@Id
-	@Column(name = "eid", unique = true, nullable = false)
-	public Integer getEid() {
-		return this.eid;
+	@EmbeddedId
+	@AttributeOverrides({
+			@AttributeOverride(name = "eid", column = @Column(name = "eid", nullable = false)),
+			@AttributeOverride(name = "tid", column = @Column(name = "tid", nullable = false)) })
+	public EventTopicRelationId getId() {
+		return this.id;
 	}
 
-	public void setEid(Integer eid) {
-		this.eid = eid;
-	}
-
-	@Column(name = "tid")
-	public Integer getTid() {
-		return this.tid;
-	}
-
-	public void setTid(Integer tid) {
-		this.tid = tid;
+	public void setId(EventTopicRelationId id) {
+		this.id = id;
 	}
 
 }

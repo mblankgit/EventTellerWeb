@@ -15,10 +15,6 @@ public class Url implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1245520426185744766L;
 	private Integer id;
 	private Date crawltime;
 	private String url;
