@@ -7,7 +7,6 @@ public class WebWord {
     private String name;
     private String wordTimeNumber;
     private String relatedWords;
-    private String personGraph;
 
     public String getName() {
         return name;
@@ -32,18 +31,8 @@ public class WebWord {
     public void setRelatedWords(String relatedWords) {
         this.relatedWords = relatedWords;
     }
-    
-    
 
-    public String getPersonGraph() {
-		return personGraph;
-	}
-
-	public void setPersonGraph(String personGraph) {
-		this.personGraph = personGraph;
-	}
-
-	@Override
+    @Override
     public int hashCode(){
         return name.hashCode();
     }

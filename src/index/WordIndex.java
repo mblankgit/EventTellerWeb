@@ -5,15 +5,15 @@ import index.model.WebWord;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
-//import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
-//import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.SolrInputDocument;
 
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.List;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mblank on 14-4-25.
@@ -27,45 +27,43 @@ public class WordIndex {
 
 
 
-//
-//    public void update(List<WebWord> wwords){
-//        try{
-//            SolrServer server = new HttpSolrServer(solrUrl);
-//            List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
-//            for(WebWord wword : wwords){
-//                SolrInputDocument doc = new SolrInputDocument();
-//                doc.addField("id", wword.getName());
-//                doc.addField("web_wordTime", wword.getWordTimeNumber());
-//                doc.addField("web_relatedWord", wword.getRelatedWords());
-//                doc.addField("web_graph",wword.getPersonGraph());
-//                docs.add(doc);
-//            }
-//            server.add(docs);
-//            server.commit();
-//        }catch(Exception e){
-//            e.printStackTrace();
-//            System.out.println("can't update to solr...");
-//        }
-//    }
-//
-//
-//    public void update(WebWord wword){
-//        try{
-//            SolrServer server = new HttpSolrServer(solrUrl);
-//            List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
-//            SolrInputDocument doc = new SolrInputDocument();
-//            doc.addField("id", wword.getName());
-//            doc.addField("web_wordTime", wword.getWordTimeNumber());
-//            doc.addField("web_relatedWord", wword.getRelatedWords());
-//            doc.addField("web_graph",wword.getPersonGraph());
-//            docs.add(doc);
-//            server.add(docs);
-//            server.commit();
-//        }catch(Exception e){
-//            e.printStackTrace();
-//            System.out.println("can't update to solr...");
-//        }
-//    }
+
+    public void update(List<WebWord> wwords){
+        try{
+            SolrServer server = new HttpSolrServer(solrUrl);
+            List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+            for(WebWord wword : wwords){
+                SolrInputDocument doc = new SolrInputDocument();
+                doc.addField("id", wword.getName());
+                doc.addField("web_wordTime", wword.getWordTimeNumber());
+                doc.addField("web_relatedWord", wword.getRelatedWords());
+                docs.add(doc);
+            }
+            server.add(docs);
+            server.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("can't update to solr...");
+        }
+    }
+
+
+    public void update(WebWord wword){
+        try{
+            SolrServer server = new HttpSolrServer(solrUrl);
+            List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+            SolrInputDocument doc = new SolrInputDocument();
+            doc.addField("id", wword.getName());
+            doc.addField("web_wordTime", wword.getWordTimeNumber());
+            doc.addField("web_relatedWord", wword.getRelatedWords());
+            docs.add(doc);
+            server.add(docs);
+            server.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("can't update to solr...");
+        }
+    }
 
     public WebWord queryIds(String word){
 
@@ -80,11 +78,9 @@ public class WordIndex {
                 String name = docs.get(0).getFieldValue("id").toString();
                 String timeLine = docs.get(0).getFieldValue("web_wordTime").toString();
                 String related = docs.get(0).getFieldValue("web_relatedWord").toString();
-                String graph = docs.get(0).getFieldValue("web_graph").toString();
                 res.setName(name);
                 res.setWordTimeNumber(timeLine);
                 res.setRelatedWords(related);
-                res.setPersonGraph(graph);
             }
         }catch(Exception e){
         	e.printStackTrace();
@@ -94,29 +90,29 @@ public class WordIndex {
     }
 
 
-//    public void deleteItem(String id){
-//        SolrServer server = new HttpSolrServer(solrUrl);
-//        try {
-//            server.deleteById(id);
-//            server.commit();
-//        } catch (SolrServerException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void deleteAll(){
-//        SolrServer server = new HttpSolrServer(solrUrl);
-//        String queryStr = "*:*";
-//        try {
-//            server.deleteByQuery(queryStr);
-//            server.commit();
-//        } catch (SolrServerException e) {
-//            e.printStackTrace();
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public void deleteItem(String id){
+        SolrServer server = new HttpSolrServer(solrUrl);
+        try {
+            server.deleteById(id);
+            server.commit();
+        } catch (SolrServerException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAll(){
+        SolrServer server = new HttpSolrServer(solrUrl);
+        String queryStr = "*:*";
+        try {
+            server.deleteByQuery(queryStr);
+            server.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }

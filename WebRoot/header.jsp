@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        </li>
 			       	<li>
 			        	<a href="word">
-			        		人物
+			        		词语
 			        	</a>
 			        </li>
       			</ul>

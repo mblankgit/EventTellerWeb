@@ -38,7 +38,6 @@ public class GetEventsAction {
 		if(ids == null || ids.length() == 0){
 			return "success";
 		}
-		System.out.println(ids.length());
 		events = new ArrayList<Event>();
 		EventIndex ei = new EventIndex();
 		String[] id = ids.split(";");

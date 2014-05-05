@@ -10,12 +10,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
-
-import model.JsonWordGraph;
-import model.JsonWordLink;
-import model.JsonWordNode;
-
 public class GetWordAction {
 	
 	private String name;
@@ -25,7 +19,6 @@ public class GetWordAction {
 	private int endDay;
 	private String relatedWords;
 	private String status;
-	private String personGraph;
 	
 	
 	private List<String> relatedPersons;
@@ -93,20 +86,9 @@ public class GetWordAction {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public String getPersonGraph() {
-		return personGraph;
-	}
-	public void setPersonGraph(String personGraph) {
-		this.personGraph = personGraph;
-	}
-
-
-
-
-
-
-	class wordNumber implements Comparable<wordNumber>{
+	
+	
+    class wordNumber implements Comparable<wordNumber>{
         public String name;
         public int count;
         public int compareTo(wordNumber other){
@@ -127,73 +109,9 @@ public class GetWordAction {
 		 }else{
 			 status = "200";
 			 timeline = word.getWordTimeNumber();
-			 processPersonGraph(name,word.getPersonGraph());
 		 }
+        System.out.println(name + "\t" + timeline);
 		return "success";
-	}
-	
-	private void processPersonGraph(String word,String scr){
-		int tid = 0,tgroup = 1;
-		HashMap<String,Integer> idIndex = new HashMap<String,Integer>();
-		HashMap<String,Integer> groups = new HashMap<String,Integer>();
-		HashMap<String,Double> sizes = new HashMap<String,Double>();
-		List<String> ids = new ArrayList<String>();
-		JsonWordGraph jwg = new JsonWordGraph();
-		String[] its = scr.split("\t");
-		for(String it : its){
-			String[] subs = it.split(",");
-			double tval = Double.parseDouble(subs[2]) * 10;
-			if(tval < 4){
-				continue;
-			}
-			JsonWordLink jwl = new JsonWordLink();
-			if(subs.length != 3){
-				continue;
-			}
-			Integer indexa = null;
-			Integer indexb = null;
-			if(subs[0].equals(word)){
-				sizes.put(subs[1], 18.0);
-				sizes.put(subs[0], 30.0);
-				if(!groups.containsKey(subs[1])){
-					groups.put(subs[1], tgroup++);
-				}
-			}else{
-				sizes.put(subs[1],10.0);
-				if(groups.containsKey(subs[0])){
-					groups.put(subs[1], groups.get(subs[0]));
-				}else{
-					groups.put(subs[0], tgroup++);
-					groups.put(subs[1], groups.get(subs[0]));
-				}				
-			}
-			if(idIndex.containsKey(subs[0])){
-				indexa = idIndex.get(subs[0]);
-			}else{
-				ids.add(subs[0]);
-				indexa = tid++;
-				idIndex.put(subs[0], indexa);
-			}
-			if(idIndex.containsKey(subs[1])){
-				indexb = idIndex.get(subs[1]);
-			}else{
-				ids.add(subs[1]);
-				indexb = tid++;
-				idIndex.put(subs[1], indexb);
-			}
-			jwl.target = indexa;
-			jwl.source = indexb;
-			jwl.value = tval;
-			jwg.links.add(jwl);
-		}
-		for(String id : ids){
-			JsonWordNode jwn = new JsonWordNode();
-			jwn.name = id;
-			jwn.group = groups.get(id);
-			jwn.size = sizes.get(id);
-			jwg.nodes.add(jwn);
-		}
-		personGraph = JSON.toJSONString(jwg);
 	}
 	
 	private void processRelatedWords(String scr){
@@ -292,6 +210,7 @@ public class GetWordAction {
 			 status = "404";
 		 }else{
 			 status = "200";
+			 System.out.println(word.getRelatedWords());
 			 processRelatedWords(word.getRelatedWords());
 		 }
 		 return "success";

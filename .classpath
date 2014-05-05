@@ -31,7 +31,6 @@
 			<attribute name="owner.project.facets" value="me.hibernate"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/jar/fastjson-1.1.39.jar"/>
 	<classpathentry kind="lib" path="D:/jar/solr-solrj-4.7.0.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

@@ -1,15 +1,15 @@
 
 
-
 $(function() {
-//    $( "#slider" ).slider({
-//    	stop: function( event, ui ) {alert(ui.value);}    	
-//    });
+    $( "#slider" ).slider({
+    	stop: function( event, ui ) {alert(ui.value);}    	
+    });
     
     $('.pc').hide();
     $('#info').hide();
     
   });
+
 
 
 $('#SBTPersonSearch').click(function(e){
@@ -20,8 +20,6 @@ $('#SBTPersonSearch').click(function(e){
 	var name = $('#SPersonQuery').val();
 	if(name != null && name.length > 0){
 		getWord(name);
-		$('#tab1').siblings("li").removeClass('active');
-		$('#tab1').addClass('active');
 		$('#ptab1').show();			
 	}else{
 		$("#namelodingimg").hide();
@@ -46,7 +44,7 @@ $("#wordTab.nav li").click(function(e){
 	$(this).addClass('active');
 	e.preventDefault();
 	$(".pc").hide();
-	$("#"+$(this).data("tag")).show();
+	$("#"+$(this).data("t")).show();
 });
 
 
@@ -63,7 +61,6 @@ function getWord(word){
 			},
 			function(data){
 				loadChart(word,data);
-				showPersonGraph(data.personGraph);
 			}
 		);
 }
@@ -164,6 +161,8 @@ function getRelatedWord(input,start,end){
 }
 
 
+
+
 function genRWordHtml(data){
 	if(data.status == "404"){
 		alert("can't find this word");
@@ -213,6 +212,7 @@ function genRWordHtml(data){
 	}
 }
 
+
 function showEvents(obj){
 	var ids = $(obj).find("p").html();
 	$('#eventslodingimg').show();
@@ -250,79 +250,6 @@ function showResults(events){
 	html += "</div>";	
 	return html;       	
 }
-
-
-/**
- * for person graph
- */
-function showPersonGraph(personGraph){
-	
-	//clear tag contents
-	$('#personGraph').html("");
-	
-	var width = 1024,
-    height = 700;
-
-	console.log(personGraph);
-	var json = $.parseJSON(personGraph);
-	var colors = d3.scale.category20();
-
-var force = d3.layout.force()
-    .charge(-500)
-    .linkDistance(100)
-    .size([width, height]);
-
-var svg = d3.select("#personGraph").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-
-  force
-      .nodes(json.nodes)
-      .links(json.links)
-      .on("tick", tick)
-      .start();
-
-  var link = svg.selectAll(".link")
-      .data(json.links)
-      .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-  var node = svg.selectAll(".node")
-      .data(json.nodes)
-      .enter().append("g")
-      .attr("class", "node")
-      .call(force.drag);
-
-  node.append("circle")
-      .attr("r", function(d) { return d.size ; })
-      .style("fill", function(d) { return colors(d.group); });
-
- 
-  node.append("title")
-      .text(function(d) { return d.name;});
- 	
-  node.append("text")
-    .attr("x", 12)
-    .attr("dy", ".35em")
-    .text(function(d) { return d.name; });
-      
-
-  function tick() {
-	  link
-	      .attr("x1", function(d) { return d.source.x; })
-	      .attr("y1", function(d) { return d.source.y; })
-	      .attr("x2", function(d) { return d.target.x; })
-	      .attr("y2", function(d) { return d.target.y; });
-	
-	  node
-	      .attr("transform", function(d) { 
-	              return "translate(" + d.x + "," + d.y + ")"; 
-	      });
-  }
-
-};
 
 
 
