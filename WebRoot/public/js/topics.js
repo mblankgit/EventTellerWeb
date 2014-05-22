@@ -119,6 +119,8 @@ $('#nexttopic').click(
         	html += "<h4>" + topics[i].summary + "</a>";
         	html += "<span class=\"badge badge-warning pull-right\">" + topics[i].number +"</span></h4>";
         	html += "<br>";
+        	html += "<span class=\"label label-primary\">" + topics[i].main + "</span>";
+        	html += "<span class=\"label label-success\">  " + topics[i].object + "</span>";
         	html += "<h5><span class=\"label label-primary\">From</span><small> " + topics[i].startTime.replace("T"," ") + "</small>";
         	html += " <span class=\"label label-success\">To</span><small> " + topics[i].endTime.replace("T"," ") +"</small>";
         	html += "</h5>";

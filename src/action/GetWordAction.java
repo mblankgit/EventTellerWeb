@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+
+import model.JsonWordGraph;
+import model.JsonWordLink;
+import model.JsonWordNode;
+
 public class GetWordAction {
 	
 	private String name;
@@ -19,11 +25,14 @@ public class GetWordAction {
 	private int endDay;
 	private String relatedWords;
 	private String status;
+	private String personGraph;
 	
 	
 	private List<String> relatedPersons;
 	private List<String> relatedPositions;
 	private List<String> relatedVerbs;
+	
+	private List<String> topicRelatedWords;
 	
 	public String getName() {
 		return name;
@@ -86,9 +95,40 @@ public class GetWordAction {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-    class wordNumber implements Comparable<wordNumber>{
+
+	public String getPersonGraph() {
+		return personGraph;
+	}
+	public void setPersonGraph(String personGraph) {
+		this.personGraph = personGraph;
+	}
+
+	public List<String> getTopicRelatedWords() {
+		return topicRelatedWords;
+	}
+	public void setTopicRelatedWords(List<String> topicRelatedWords) {
+		this.topicRelatedWords = topicRelatedWords;
+	}
+
+
+
+
+	class cword implements Comparable<cword>{
+		public String name;
+        public int count;
+        public List<wordNumber> ids = new ArrayList<wordNumber>();
+        public String eventRelations;
+        public int compareTo(cword other){
+            if(other.count > this.count){
+                return 1;
+            }else{
+                return -1;
+            }
+        }
+	}
+
+
+	class wordNumber implements Comparable<wordNumber>{
         public String name;
         public int count;
         public int compareTo(wordNumber other){
@@ -100,6 +140,54 @@ public class GetWordAction {
         }
     }
 	
+	private void processTopicRelatedWords(String word,String scr){
+		topicRelatedWords = new ArrayList<String>();
+		int maxWord = 15;
+		int maxTopic = 5;
+		List<cword> cwords = new ArrayList<cword>();
+		//words
+		String[] its = scr.split(";");
+		for(String it : its){
+			String[] subs = it.split(",");
+			cword cw = new cword();
+			cw.name = subs[0];
+			cw.count = Integer.parseInt(subs[1]);
+			cw.eventRelations = subs[3];
+			String[] sids = subs[2].split(" ");
+			List<wordNumber> wns = new ArrayList<wordNumber>();
+			for(String sid : sids){
+				String[] sits = sid.split("[|]");
+				wordNumber wn = new wordNumber();
+				wn.name = sits[0];
+				wn.count = Integer.parseInt(sits[1]);
+				wns.add(wn);
+			}
+			Collections.sort(wns);
+			cw.ids = wns;
+			cwords.add(cw);
+		}
+		Collections.sort(cwords);
+		int numWord = 0;
+		for(cword cw : cwords){
+			numWord++;
+			if(numWord > maxWord){
+				break;
+			}
+			StringBuffer tmp = new StringBuffer();
+			tmp.append(cw.name + "," + cw.count + "\t");
+			int numTopic = 0;
+			for(wordNumber wn : cw.ids){
+				numTopic++;
+				if(numTopic > maxTopic){
+					break;
+				}
+				tmp.append(wn.name + " ");
+			}
+			tmp.append("\t" + cw.eventRelations);
+			topicRelatedWords.add(tmp.toString());
+		}
+		System.out.println(topicRelatedWords.size());
+	}
 	
 	public String getWordTime() throws UnsupportedEncodingException{
 		 WordIndex wi = new WordIndex();
@@ -109,9 +197,74 @@ public class GetWordAction {
 		 }else{
 			 status = "200";
 			 timeline = word.getWordTimeNumber();
+			 processPersonGraph(name,word.getPersonGraph());
+			 processTopicRelatedWords(name,word.getTopicRelatedWords());
 		 }
-        System.out.println(name + "\t" + timeline);
 		return "success";
+	}
+	
+	private void processPersonGraph(String word,String scr){
+		int tid = 0,tgroup = 1;
+		HashMap<String,Integer> idIndex = new HashMap<String,Integer>();
+		HashMap<String,Integer> groups = new HashMap<String,Integer>();
+		HashMap<String,Double> sizes = new HashMap<String,Double>();
+		List<String> ids = new ArrayList<String>();
+		JsonWordGraph jwg = new JsonWordGraph();
+		String[] its = scr.split("\t");
+		for(String it : its){
+			String[] subs = it.split(",");
+			double tval = Double.parseDouble(subs[2]) * 10;
+			if(tval < 4){
+				continue;
+			}
+			JsonWordLink jwl = new JsonWordLink();
+			if(subs.length != 3){
+				continue;
+			}
+			Integer indexa = null;
+			Integer indexb = null;
+			if(subs[0].equals(word)){
+				sizes.put(subs[1], 18.0);
+				sizes.put(subs[0], 30.0);
+				if(!groups.containsKey(subs[1])){
+					groups.put(subs[1], tgroup++);
+				}
+			}else{
+				sizes.put(subs[1],10.0);
+				if(groups.containsKey(subs[0])){
+					groups.put(subs[1], groups.get(subs[0]));
+				}else{
+					groups.put(subs[0], tgroup++);
+					groups.put(subs[1], groups.get(subs[0]));
+				}				
+			}
+			if(idIndex.containsKey(subs[0])){
+				indexa = idIndex.get(subs[0]);
+			}else{
+				ids.add(subs[0]);
+				indexa = tid++;
+				idIndex.put(subs[0], indexa);
+			}
+			if(idIndex.containsKey(subs[1])){
+				indexb = idIndex.get(subs[1]);
+			}else{
+				ids.add(subs[1]);
+				indexb = tid++;
+				idIndex.put(subs[1], indexb);
+			}
+			jwl.target = indexa;
+			jwl.source = indexb;
+			jwl.value = tval;
+			jwg.links.add(jwl);
+		}
+		for(String id : ids){
+			JsonWordNode jwn = new JsonWordNode();
+			jwn.name = id;
+			jwn.group = groups.get(id);
+			jwn.size = sizes.get(id);
+			jwg.nodes.add(jwn);
+		}
+		personGraph = JSON.toJSONString(jwg);
 	}
 	
 	private void processRelatedWords(String scr){
@@ -121,7 +274,6 @@ public class GetWordAction {
 		//add to list
 		//get days
 		String[] days = scr.split("\t");
-//		StringBuffer res = new StringBuffer();
         HashMap<String,HashMap<String,Integer>> numbers = new HashMap<String, HashMap<String, Integer>>();
         HashMap<String,HashSet<Integer>> ids = new HashMap<String, HashSet<Integer>>();
 		for(String day : days){
@@ -210,7 +362,6 @@ public class GetWordAction {
 			 status = "404";
 		 }else{
 			 status = "200";
-			 System.out.println(word.getRelatedWords());
 			 processRelatedWords(word.getRelatedWords());
 		 }
 		 return "success";

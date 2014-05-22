@@ -7,6 +7,8 @@ public class WebWord {
     private String name;
     private String wordTimeNumber;
     private String relatedWords;
+    private String personGraph;
+    private String topicRelatedWords;
 
     public String getName() {
         return name;
@@ -31,8 +33,24 @@ public class WebWord {
     public void setRelatedWords(String relatedWords) {
         this.relatedWords = relatedWords;
     }
+    
+    public String getTopicRelatedWords() {
+		return topicRelatedWords;
+	}
 
-    @Override
+	public void setTopicRelatedWords(String topicRelatedWords) {
+		this.topicRelatedWords = topicRelatedWords;
+	}
+
+	public String getPersonGraph() {
+		return personGraph;
+	}
+
+	public void setPersonGraph(String personGraph) {
+		this.personGraph = personGraph;
+	}
+
+	@Override
     public int hashCode(){
         return name.hashCode();
     }
