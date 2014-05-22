@@ -1,8 +1,9 @@
 
 
+
 $(function() {
     $( "#slider" ).slider({
-    	stop: function( event, ui ) {alert(ui.value);}    	
+    	stop: function( event, ui ) {timeVector(event,ui);}    	
     });
     
     $('.pc').hide();
@@ -10,6 +11,28 @@ $(function() {
     
   });
 
+function timeVector(event,ui){
+	//post name + ui.value
+	//get persongraph
+	$('#personGraph').html("");
+	$('#tprlodingimg').show();
+	var word = $('#SPersonQuery').val();
+	//try to get data from server
+	$.post(
+			'getPersonTimeRelation',
+			{
+				name:word,
+				persent:ui.value
+			},
+			function(data){
+				$('#tprlodingimg').hide();
+				constructGraph(data.personGraph,"personGraph",700,1024,-300,150);
+				$('#personGraph').show();
+				$('#personGraph').fadeIn(500);
+			}
+		);	
+	
+}
 
 
 $('#SBTPersonSearch').click(function(e){
@@ -20,6 +43,8 @@ $('#SBTPersonSearch').click(function(e){
 	var name = $('#SPersonQuery').val();
 	if(name != null && name.length > 0){
 		getWord(name);
+		$('#tab1').siblings("li").removeClass('active');
+		$('#tab1').addClass('active');
 		$('#ptab1').show();			
 	}else{
 		$("#namelodingimg").hide();
@@ -44,7 +69,7 @@ $("#wordTab.nav li").click(function(e){
 	$(this).addClass('active');
 	e.preventDefault();
 	$(".pc").hide();
-	$("#"+$(this).data("t")).show();
+	$("#"+$(this).data("tag")).show();
 });
 
 
@@ -61,6 +86,8 @@ function getWord(word){
 			},
 			function(data){
 				loadChart(word,data);
+				constructGraph(data.personGraph,"personGraph",700,1024,-300,100);
+				showTopicRelatedWords(data.topicRelatedWords);
 			}
 		);
 }
@@ -161,8 +188,6 @@ function getRelatedWord(input,start,end){
 }
 
 
-
-
 function genRWordHtml(data){
 	if(data.status == "404"){
 		alert("can't find this word");
@@ -212,7 +237,6 @@ function genRWordHtml(data){
 	}
 }
 
-
 function showEvents(obj){
 	var ids = $(obj).find("p").html();
 	$('#eventslodingimg').show();
@@ -251,6 +275,129 @@ function showResults(events){
 	return html;       	
 }
 
+function constructGraph(jsonStr,HtmlId,height,width,charge,distance){
+	//clear tag contents
+	$("#" + HtmlId).html("");
+	
+	var json = $.parseJSON(jsonStr);
+	var colors = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(charge)
+    .linkDistance(distance)
+    .size([width, height]);
+
+var svg = d3.select("#" + HtmlId).append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .on("tick", tick)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(json.links)
+      .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag);
+
+  node.append("circle")
+      .attr("r", function(d) { return d.size ; })
+      .style("fill", function(d) { return colors(d.group); });
+
+ 
+  node.append("title")
+      .text(function(d) { return d.title;});
+ 	
+  node.append("text")
+    .attr("x", 12)
+    .attr("dy", ".35em")
+    .text(function(d) { return d.name; });
+      
+
+  function tick() {
+	  link
+	      .attr("x1", function(d) { return d.source.x; })
+	      .attr("y1", function(d) { return d.source.y; })
+	      .attr("x2", function(d) { return d.target.x; })
+	      .attr("y2", function(d) { return d.target.y; });
+	
+	  node
+	      .attr("transform", function(d) { 
+	              return "translate(" + d.x + "," + d.y + ")"; 
+	      });
+  }
+}
+
+
+function showTopicRelatedWords(data){
+	var vhtml = "";
+	for(var i = 0 ; i < data.length; ++i){
+		var subs = data[i].split("\t");
+		if(subs.length == 3){
+			vhtml += "<a href=\"javascript:;\" onclick=\"showWordRelatedTopics(this)\"><h4>" + subs[0] + "</h4>";
+			vhtml += "<p style=\"display:none\">" + subs[1] + "</p>";
+			vhtml += "<div style=\"display:none\">" + subs[2] + "</div></a>";
+		}
+	}
+	if(vhtml.length == 0){
+		$('#topicRelatedWords').html("no words");
+	}else{
+		$('#topicRelatedWords').html(vhtml);
+	}
+}
+
+function showWordRelatedTopics(obj){
+	var ids = $(obj).find("p").html();
+	var eventRelations = $(obj).find("div").html();
+	$('#wordsRelatedTopics').html("");
+	$('#wordTopiclodingimg').show();
+	$.post(
+			'getTopicsByIds',
+			{
+				ids:ids,
+				eventRelations:eventRelations
+			},
+			function(data){
+				var html ;
+				html = generateWordTopicResults(data.tps);
+				$('#wordsRelatedTopics').html(html);
+	        	$("#wordTopiclodingimg").hide();
+	        	$("#wordsRelatedTopics").fadeIn(500);
+	        	constructGraph(data.eventsGraph,"EventsGraph",700,1024,-100,50);
+			}
+	);
+}
+
+function generateWordTopicResults(topics){
+	var html = "";
+	if(topics == null || topics.length == 0){
+		html = "<div class=\"col-md-12\"><div class=\"alert alert-danger\"><strong>Sorry!</strong> No Topics to show.</div></div>";
+		return html;
+	}
+	for(var i = 0 ;i < topics.length;i++){
+    	html +=  "<div class=\"col-md-12\">";
+    	html += "<a href=\"show_topic?tid=" + topics[i].id + "\" target=\"_blank\">";
+    	html += "<h4>" + topics[i].keyWords + "</a>";
+    	html += "<span class=\"badge badge-warning pull-right\">" + topics[i].number +"</span></h4>";
+    	html += "<br>";
+    	html += "<h5><span class=\"label label-primary\">From</span><small> " + topics[i].startTime.replace("T"," ") + "</small>";
+    	html += " <span class=\"label label-success\">To</span><small> " + topics[i].endTime.replace("T"," ") +"</small>";
+    	html += "</h5>";
+    	html += "<hr class=\"soften\">";
+    	html += "</div>";	
+	}			
+	return html;
+}
 
 
 

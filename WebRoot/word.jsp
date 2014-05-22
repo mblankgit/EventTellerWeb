@@ -18,7 +18,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="public/css/jquery-ui.css" />
+<style>
 
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 100px;
+}
+
+.node circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+</style>
   </head>
   
   <body>
@@ -42,9 +61,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<br />
     	<div class="row">
     		<ul class="nav nav-tabs nav-justified" id="wordTab">
-				<li class="active" data-t="ptab1"><a href="">关注热度与相关实体分析</a></li>
-				<li data-t="ptab2"><a href="javascript:;">人物关系图</a></li>
-				<li data-t="ptab3"><a href="javascript:;">相关话题</a></li>
+				<li class="active" id="tab1" data-tag="ptab1"><a href="javascript:;">关注热度与相关实体分析</a></li>
+				<li id="tab2" data-tag="ptab2"><a href="javascript:;">人物关系图</a></li>
+				<li id="tab3" data-tag="ptab3"><a href="javascript:;">相关话题</a></li>
 			</ul>
     	</div>
     	<div class="row">
@@ -63,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     	
     	<div class="row  pc" id = "ptab1" style="display:block;">
-    		<div class="row">
+    		<div class="row" style="height:400px;">
     			<div class="col-md-12" id = "WordTimeChart"></div>    					
     		</div>
     		
@@ -143,27 +162,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			
     			
 	  	<div class="row  pc" id = "ptab2" style="display:none;">
-	  		<br/>
-	  		<h2>choose time point here...</h2>
-	    	<div id="slider"></div>
+	  		<div class="row"> 
+	  			<div class="col-md-4" style="text-align:center;">
+		  			<h3><span class="label label-primary">Choose A Time Point Here</span></h3>
+	  			</div>
+	  			<div class="col-md-8" style="text-align:center;">
+		    		<div id="slider"></div>
+	  			</div>
+	  		</div>
+	  		<br />
+	  		<div class="row">
+	  			<div id = "tprlodingimg" style="text-align:center; display: none;">
+					<img src="public/img/loading.gif" >
+				</div>
+				<hr />
+	  			<div id="personGraph" class="container" style="text-align:center; height:700px;"></div>
+	  		</div> 	
 	  	</div>
     			
     	<div class="row  pc" id = "ptab3" style="display:none;">
     		<div class="row">
-    			<div class="col-md-12">
-    				<h3>some related words</h3>
-    				<div class="container">
-	    				<h4>
-	    					<label class="label label-warning">tes1t</label>
-	    					<label class="label label-warning">test2</label>
-	    					<label class="label label-warning">test3</label>
-    					</h4>
+    			<div class="col-md-2">
+    				<div class="panel panel-primary">
+    					<div class="panel-heading">Related Topic Words</div>
+    					<div class="panel-body">
+    						<div id="topicRelatedWords"></div>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-10">
+    				<div class="panel panel-primary">
+    					<div class="panel-heading">Related Topics</div>
+    					<div class="panel-body">
+    						<div id = "wordTopiclodingimg" style="text-align:center; display: none;" class="col-md-2">
+								<img src="public/img/loading.gif" >
+							</div>
+    						<div id="wordsRelatedTopics"></div>
+    					</div>
     				</div>
     			</div>
     		</div>
     		<div class="row">
-    			<div class="container">
-    				<h1>Topic Relation here....</h1>
+    			<div class="container" style="height:800px;">
+    				<hr>
+    				<h1>Event Relations</h1>
+    				<div id = "EventsGraph"></div>
     			</div>
     		</div>    				
     	</div>
@@ -177,6 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<script src="public/js/bootstrap.min.js"></script>
 	<script src="public/js/search.js"></script>
 	<script src="public/js/highcharts.js"></script>
+	<script src="public/js/d3.js"></script>
 	<script src="public/js/word.js"></script>
     
   </body>

@@ -82,9 +82,18 @@
             <result name="success" type="json"></result>
         </action>
         
-         <action name="getEventsByIds" class="action.GetEventsAction" method="getEventsByIds">
+         <action name="getEventsByIds" class="action.GetEvents" method="getEventsByIds">
             <result name="success" type="json"></result>
         </action>       
+        
+                
+         <action name="getTopicsByIds" class="action.GetTopics" method="getTopicsByIds">
+            <result name="success" type="json"></result>
+        </action>  
+        
+        <action name="getPersonTimeRelation" class="action.GetPersonTimeR" method="getRelations">
+            <result type="json"></result>
+        </action>  
         
         
     </package>

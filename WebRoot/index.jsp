@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 					<div class="index-say" style="padding:40px;">
 						<div class="index-say-inner">
-							<h3 class="index-say-title">热门事件</h3>
+							<h3 class="index-say-title">热门话题</h3>
 							<div class="row">
 								<ul class="wordcd list-group col-md-3">
 								</ul>
